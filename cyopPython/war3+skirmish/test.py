@@ -1,8 +1,14 @@
 ''''waste of time'''
-import pandas as pd
-
 from matplotlib import pyplot as plt
 from matplotlib import image as mpimg
+from PIL import Image
+from pathlib import Path
+import pandas as pd
+
+
+
+
+
 
 #I like this output. print df gives me a weird 3 dot thing
 #Maybe we use read_csv to return all states +
@@ -43,7 +49,21 @@ def get_state_info():
 
     postal = input('Please enter your states postal name to see its details: ')
     selected_state = df_state_info.loc[postal]
-    the_state = selected_state[0]
-    print(f'I am {the_state}')
+
+    # get_image = selected_state.loc[4]
+    # print(get_image)
+
     print(f'Your selected states information is: \n\n {selected_state}')
+    # image = mpimg.imread("md_flower.jpg")
+    # plt.imshow(image)
+    # plt.show()    
 get_state_info()
+
+# 
+
+# folder_dir = 'flowers'
+# images = Path(folder_dir).glob('*.jpg')
+# userSelection = input('What img do you want to see? ')
+# for image in images:
+#     print(image)
+
