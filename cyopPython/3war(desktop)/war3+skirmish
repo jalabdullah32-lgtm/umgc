@@ -1,12 +1,7 @@
-''''waste of time'''
 import pandas as pd
 
-from matplotlib import pyplot as plt
-from matplotlib import image as mpimg
-
-#I like this output. print df gives me a weird 3 dot thing
+#I like this out put. DataFrame gives me a weird 3 dot thing
 #Maybe we use read_csv to return all states +
-
 # df = pd.DataFrame(data)
 
 #Good code here - allows me to get all of a states data from index_col
@@ -22,28 +17,18 @@ from matplotlib import image as mpimg
 #     index_col='State')
 
 
-data = pd.read_csv('state_info_md.csv')
+data = pd.read_csv('state_info.csv')
 df = pd.DataFrame(data)
 
-# print(data)
-
-# plt.title("flower img")
-# plt.xlabel("x pixel scaling")
-# plt.ylabel("Y pixels scaling")
-
-# image = mpimg.imread("md_flower.jpg")
-# plt.imshow(image)
-# plt.show()
 
 def get_state_info():
-    '''docstring_placeholder'''
-    df_state_info = df
-    df_state_info = pd.read_csv('state_info_md.csv',
-        index_col='postal',)
+    df = pd.read_csv('state_info.csv',
+        index_col='Postal')
 
     postal = input('Please enter your states postal name to see its details: ')
-    selected_state = df_state_info.loc[postal]
-    the_state = selected_state[0]
-    print(f'I am {the_state}')
+    selected_state = df.loc[postal]
     print(f'Your selected states information is: \n\n {selected_state}')
 get_state_info()
+
+
+
