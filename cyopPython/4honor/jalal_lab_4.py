@@ -1,5 +1,6 @@
 '''Docstring for jalal_lab_4'''
 import re
+import numpy as np
 
 def phone_number():
     phone_input = input('Enter in your phone number with no dashes or parentheses: ')
@@ -15,4 +16,17 @@ def phone_number():
             break
         if result == False:
             print('Your number was incorrect, would you like to try again?')
-phone_number()
+# phone_number()
+#zipcode will be similar to above
+
+def matrix():
+    print('Example input: 1,2,3')
+    matrix1_column1 = float(input('Please enter the first column of your matrix: '))
+    matrix2_column2 = float(input('Please enter the second column of your matrix: '))
+    matrix3_column3 = float(input('Please enter the third column of your matrix: '))
+
+
+
+    random = np.array([[matrix1_column1],[matrix2_column2],[matrix3_column3]])    
+    print(random)
+matrix()
