@@ -2,6 +2,7 @@
 # import re
 import sys
 import numpy as np
+# import pandas as pd
 
 def value_error():
     '''input validation function'''
@@ -157,10 +158,46 @@ def matrix_row_three():
             break
         except ValueError:
             value_error()
-
 def create_matrix_one():
     '''grabs matrix'''
     print('')
+
+
+matrix_one = np.array([[1.,2.,3.],[4.,5.,6.],[7.,8.,9.]])
+matrix_two = np.array([[13.7,11.4,2.1],[5.3,14.6,43.8],[10.5,9.3,5.1]])
+
+def add_matrices():
+    '''adds and transposes two and mean values  matrices'''
+    adding_matrices = np.add(matrix_one,matrix_two)
+    print(f'I added your matrices together, your output is: \n{adding_matrices}')
+
+    print('')
+
+    transposed_matices_sum = np.transpose(adding_matrices)
+    print(f'I transposed the sum of your matrices, the output is: \n{transposed_matices_sum}')
+
+    mean_value1 = np.mean(adding_matrices, axis=1)
+
+    #I want this to be cleaner, but for now its ok. 
+    for i in mean_value1:
+        print(f'Looking at your added matrices in row format, the mean is: {i}')
+
+def subtract_matricies():
+    '''subtracts and transposes two and mean values  matrices'''
+    subtracting_matrices = np.subtract(matrix_one,matrix_two)
+    print(f'I added your matrices together, your output is: \n{subtracting_matrices}')
+
+    print('')
+
+    transposed_matices_sum = np.transpose(subtracting_matrices)
+    print(f'I transposed the sum of your matrices, the output is: \n{transposed_matices_sum}')
+
+    mean_value1 = np.mean(subtracting_matrices, axis=1)
+
+    #I want this to be cleaner, but for now its ok. 
+    for i in mean_value1:
+        print(f'Looking at your subtracted matrices in row format, the mean is: {i}')
+
 def run_matrix():
     '''grabs matrix'''
     matrix_row_one()
@@ -170,4 +207,4 @@ def run_matrix():
 
     print('--------------------------------------------')
     print(f'\n Matrix one = \n{matrix_one}')
-run_matrix()
+# run_matrix()
