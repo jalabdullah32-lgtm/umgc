@@ -57,8 +57,7 @@ def matrix_row_one():
     while True:
         try:
             sample_row = np.array([0.0,0.0,0.0])
-            print('This is the first row, of the first matrix')
-            print('--------------------------------------------')
+            print('-----------------------')
 
             def row_one():
                 print(f'Your first row currently looks like {sample_row}')
@@ -92,11 +91,11 @@ def matrix_row_two():
     while True:
         try:
             sample_row = np.array([0.0,0.0,0.0])
-            print('\nThis is the second row, of the first matrix')
-            print('--------------------------------------------')
+            print('--------------------------')
 
             def row_two():
-                print(f'Your first row currently looks like {sample_row}')
+                print(f'Your second row currently looks like {sample_row}')
+
                 value_one = float(input('\nPlease enter your first matrix value: '))
                 sample_row[0] = value_one
                 print(sample_row)
@@ -128,11 +127,10 @@ def matrix_row_three():
     while True:
         try:
             sample_row = np.array([0.0,0.0,0.0])
-            print('\nThis is the third and final row of the first matrix')
-            print('--------------------------------------------')
+            print('-------------------------')
 
             def row_three():
-                print(f'Your first row currently looks like {sample_row}')
+                print(f'Your third row currently looks like {sample_row}')
                 value_one = float(input('Please enter your first matrix value: '))
                 sample_row[0] = value_one
                 print(sample_row)
@@ -166,7 +164,7 @@ def create_matrix_one():
 matrix_one = np.array([[1.,2.,3.],[4.,5.,6.],[7.,8.,9.]])
 matrix_two = np.array([[13.7,11.4,2.1],[5.3,14.6,43.8],[10.5,9.3,5.1]])
 
-def add_matrices():
+def add_matrices(matrix_one,matrix_two):
     '''adds and transposes two and mean values  matrices'''
     adding_matrices = np.add(matrix_one,matrix_two)
     print(f'I added your matrices together, your output is: \n{adding_matrices}')
@@ -176,35 +174,134 @@ def add_matrices():
     transposed_matices_sum = np.transpose(adding_matrices)
     print(f'I transposed the sum of your matrices, the output is: \n{transposed_matices_sum}')
 
-    mean_value1 = np.mean(adding_matrices, axis=1)
+    row_mean = np.mean(adding_matrices, axis=1)
+    column_mean = np.mean(adding_matrices, axis=0)
 
-    #I want this to be cleaner, but for now its ok. 
-    for i in mean_value1:
+    #I want this to be cleaner, but for now its ok.
+    for i in row_mean:
         print(f'Looking at your added matrices in row format, the mean is: {i}')
-
+    print("")
+    for i in column_mean:
+        print(f'Looking at your added matrice in column format, the mean is: {i}')
 def subtract_matricies():
     '''subtracts and transposes two and mean values  matrices'''
     subtracting_matrices = np.subtract(matrix_one,matrix_two)
-    print(f'I added your matrices together, your output is: \n{subtracting_matrices}')
+    print(f'I subtracted your matrices against eachother, your output is: \n{subtracting_matrices}')
 
     print('')
 
     transposed_matices_sum = np.transpose(subtracting_matrices)
     print(f'I transposed the sum of your matrices, the output is: \n{transposed_matices_sum}')
 
-    mean_value1 = np.mean(subtracting_matrices, axis=1)
+    row_mean = np.mean(subtracting_matrices, axis=1)
+    column_mean = np.mean(subtracting_matrices, axis=0)
 
-    #I want this to be cleaner, but for now its ok. 
-    for i in mean_value1:
+    #I want this to be cleaner, but for now its ok.
+    for i in row_mean:
         print(f'Looking at your subtracted matrices in row format, the mean is: {i}')
+    print("")
+    #verify this, but should be ok
+    for i in column_mean:
+        print(f'Looking at our subtracted matrices in column format, the mean is: {i}')
+def multiply_matrices():
+    '''subtracts and transposes two and mean values  matrices'''
+    multiplying_matrices = matrix_one @ matrix_two
+    print(f'I multiplied your matrices against eachother, your output is: \n{multiplying_matrices}')
 
+    print('')
+
+    transposed_matices_sum = np.transpose(multiplying_matrices)
+    print(f'I transposed the product of your matrices, the output is: \n{transposed_matices_sum}')
+
+    row_mean = np.mean(multiplying_matrices, axis=1)
+    column_mean = np.mean(multiplying_matrices, axis=0)
+
+    #I want this to be cleaner, but for now its ok.
+    print('')
+    for i in row_mean:
+        print(f'Looking at your multiplied matrices in row format, the mean is: {i}')
+    print("")
+    #verify this, but should be ok
+    for i in column_mean:
+        print(f'Looking at your multiplied matrices in column format, the mean is: {i}')
+def multiply_matrices_by_element():
+    '''subtracts and transposes two and mean values  matrices'''
+
+    element_by_element = matrix_one * matrix_two
+    print('I multiplied your matrices against eachother, element by element.'
+          f'Your output is: \n{element_by_element}')
+    print('')
+
+    transposed_matices_sum = np.transpose(element_by_element)
+    print(f'I transposed the product of your matrices, the output is: \n{transposed_matices_sum}')
+
+    row_mean = np.mean(element_by_element, axis=1)
+    column_mean = np.mean(element_by_element, axis=0)
+
+    print('')
+    for i in row_mean:
+        print(f'Looking at your element by element matrices in row format, the mean is: {i}')
+    print('')
+
+    for i in column_mean:
+        print(f'Looking at your element by element matrices in column format, the mean is: {i}')
 def run_matrix():
     '''grabs matrix'''
+    global matrix_one
+    global matrix_two
+
+    print('Creating matrix one')
     matrix_row_one()
     matrix_row_two()
     matrix_row_three()
     matrix_one = np.array([row_one_matrix,row_two_matrix,row_three_matrix])
 
     print('--------------------------------------------')
+
+    print('\nCreating matrix two')
+    matrix_row_one()
+    matrix_row_two()
+    matrix_row_three()
+    matrix_two = np.array([row_one_matrix,row_two_matrix,row_three_matrix])
+
+    print('--------------------------------------------')
     print(f'\n Matrix one = \n{matrix_one}')
-# run_matrix()
+    print(f'\n Matrix two = \n{matrix_two}')
+
+def menu():
+    run_matrix()
+
+    while True:
+        print('\n\n Matrix program')
+        print('-------------------------------------------------')
+        print('A. Get all states')
+        print('B. Get info on a specific state')
+        print('C. Top 5 states ordered by population')
+        print('D. Update a states population')
+        print('E. Exit Program')
+        desired_destination = input('Enter respective letter for desired operation: ')
+
+        acceptable_inputs = ['A','B','C','D','E']
+        x = desired_destination.upper()
+
+        if x not in acceptable_inputs:
+            if value_error():
+                continue
+
+        if x == 'A':
+            add_matrices(matrix_one,matrix_two)
+        
+        # if x == 'B':
+        #     get_state_info()
+
+        # if x == 'C':
+        #     top5_states()
+
+        # if x == 'D':
+        #     update_population()
+
+        # if x == 'E':
+        #     exit_program()
+
+menu()
+
