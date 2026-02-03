@@ -1,10 +1,11 @@
 '''Docstring for jalal_lab_4'''
-# import re
 import sys
 import numpy as np
 
-matrix_one = np.array([[1.,2.,3.],[4.,5.,6.],[7.,8.,9.]])
-matrix_two = np.array([[13.7,11.4,2.1],[5.3,14.6,43.8],[10.5,9.3,5.1]])
+# sample np.arrays for testing 
+# matrix_one = np.array([[1.,2.,3.],[4.,5.,6.],[7.,8.,9.]])
+# matrix_two = np.array([[13.7,11.4,2.1],[5.3,14.6,43.8],[10.5,9.3,5.1]])
+
 def value_error():
     '''input validation function'''
     print('')
@@ -32,23 +33,38 @@ def exit_program():
     print("\nYou have exited the program, thank you.")
     sys.exit()
 def phone_number():
-    '''user enters phonenumber and it is validated'''
-
-    phone_input = input('Enter in your phone number with no dashes or parentheses: ')
-    result = phone_input.isnumeric()
-    # if phone_input
+    '''user enters phone number and it is validated'''
+    
     while True:
+        phone_input = input('Enter in your phone number with no dashes or parentheses: ')
+        result = phone_input.isnumeric()
         if result == True:
             areacode = phone_input[0:3]
             middle_number = phone_input[3:6]
             last_four = phone_input[-4:]
             formatted_number = f'{areacode}-{middle_number}-{last_four}'
-            print(formatted_number)
+            print(f'Your number is {formatted_number}')
             break
         if result == False:
-            print('Your number was incorrect, would you like to try again?')
-# phone_number()
-#zipcode will be similar to above
+            value_error()
+            continue
+phone_number()
+def zipcode():
+    '''user enters zipcode and it is validated'''
+    
+    while True:
+        zip_input = input('Enter in your full zipcode with no dashes: ')
+        result = zip_input.isnumeric()
+        if result == True:
+            pre_dash = zip_input[0:5]
+            post_dash = zip_input[-4:]
+            formatted_zip = f'{pre_dash}-{post_dash}'
+            print(f'Your zipcode is {formatted_zip}')
+            break
+
+        if result == False:
+            value_error()
+zipcode()
 
 def matrix_row_one():
     '''Docstring for jalal_lab_4'''
@@ -154,6 +170,8 @@ def column_means(cm_value1, cm_value2, cm_value3):
     '''provides column means in cleaner format'''
     print(f'The mean value of each column in your matrix is: [{cm_value1}, {cm_value2}, {cm_value3}] ')
 
+
+
 def add_matrices(matrix_one,matrix_two):
     '''adds and transposes two and mean values  matrices'''
 
@@ -204,7 +222,6 @@ def subtract_matricies(matrix_one, matrix_two):
 
     print('')
     column_means(cm_value1,cm_value2,cm_value3)
-
 def multiply_matrices(matrix_one, matrix_two):
     '''subtracts and transposes two and mean values  matrices'''
     multiplying_matrices = matrix_one @ matrix_two
@@ -229,7 +246,6 @@ def multiply_matrices(matrix_one, matrix_two):
 
     print('')
     column_means(cm_value1,cm_value2,cm_value3)
-
 def multiply_matrices_by_element(matrix_one, matrix_two):
     '''subtracts and transposes two and mean values  matrices'''
 
@@ -256,7 +272,6 @@ def multiply_matrices_by_element(matrix_one, matrix_two):
 
     print('')
     column_means(cm_value1,cm_value2,cm_value3)
-
 def create_matrices():
     '''creating matrices'''
     global matrix_one
@@ -281,7 +296,7 @@ def create_matrices():
     print(f'\n Matrix two = \n{matrix_two}')
 def menu():
     '''creating matrices'''
-    # create_matrices()
+    create_matrices()
 
     while True:
         print('\n\n Matrix program')
