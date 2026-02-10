@@ -1,2 +1,0 @@
-This file is not the same as the one inside of main.
-I changed it to show my editability with github.
