@@ -4,7 +4,7 @@ import statistics
 import pandas as pd
 
 
-population_data = pd.read_csv('pop_change.csv')
+population_data = pd.read_csv('pop_change.csv', index_col=0)
 population_df = pd.DataFrame(population_data)
 pop_shape = population_df.shape[0]
 print(pop_shape)
@@ -146,7 +146,7 @@ def july_func():
 def user_population_data():
     '''runs population data'''
     while True:
-        print('\nA. Population of April 1 \nB. Population of July 1\nC. Exit Program')
+        print('\nA. Population of April 1 \nB. Population of July 1\nC. Return to home\nD. Exit program')
         column_to_analyze = input('Select a population to analyze, or exit the program: ')
         x = column_to_analyze.upper()
 
@@ -162,90 +162,18 @@ def user_population_data():
             load_jul1_data()
             july_func()
         if x == 'C':
+            return
+        if x == 'D':
             exit_program()
 def update_population():
     '''user can update population change between apr and jul'''
-   
-    def update_population1():
-        while True:
-            row_to_update = input('\nEnter the row you wish to update. It can be between 0-555: ')
-            try:
-                x = int(row_to_update)
+    while True: 
 
-                if 0 <= x <= 555:
-                    # Next function in here
-                    update_population2(x)
-               
-                else:
-                    print('This row cannot be found inside dataset, would you like to try again?')
-                    user_input = input('Enter yes or no: ')
-                    y = user_input.lower()
-
-                    if y == 'yes':
-                        continue
-                    if y == 'no':
-                        exit_program()
-                    else:
-                        print('I didnt understand that, restarting program')
-                        continue
-            except ValueError:
-                value_error()
-
-    def update_population2(x):
-        selected_row = population_df.loc[x]
-
-        print(f'\nThis is the current data for your selected row: \n {selected_row}')
-        print('\nA. April\nB. July\nC. Both')
-        user_input = input('Please select a value to update: ')
-        while True:
-            y = user_input.upper()
-            acceptable_inputs = ['A','B','C']
-
-            if y not in acceptable_inputs:
-                if value_error():
-                    continue
-
-            if y == 'A':
-                apr1_population_update = input('Please enter your updated population: ')
-                apr1_population_int = int(apr1_population_update)
-                current_apr1_population = population_df.loc[x,'Pop Apr 1']
-                user_update = input(f"The current population of row "
-                                    f"{x} is {current_apr1_population}."
-                f" Would you like to change update it to "
-                f"{apr1_population_update}? Answer yes or no: ")
-
-                user_update.lower()
-                if user_update == 'yes':
-
-                    population_df.loc[x,'Pop Apr 1'] = apr1_population_int
-                    population_df.to_csv('pop_change.csv')
-                    apr1_current_population = population_df.loc[x,'Pop Apr 1']
-                    jul1_current_population = population_df.loc[x,'Pop Jul 1']
-                    print(apr1_current_population + jul1_current_population)
-                    print(f'\nHere is your updated population:\n{population_df.loc[x]}')
-                    break
-                if user_update == 'no':
-                    print('Returning to main menu')
-                    break
-
-                print('Not updating population, and returning to main menu.')
-                break
-
-            if y == 'B':
-                print('yo')
-            if y == 'C':
-                print('yo')
-
-
-
-
-    while True:
-
-        print('A. Continue to update population \nB. Exit program')
+        print('A. Continue to update population \nB. Return to home\nC. Exit program')
         user_choice = input('Enter a letter for your desired action: ')
         x = user_choice.upper()
 
-        acceptable_inputs = ['A','B']
+        acceptable_inputs = ['A','B','C']
 
         if x not in acceptable_inputs:
             if value_error():
@@ -253,9 +181,137 @@ def update_population():
         if x == 'A':
             update_population1()
         if x == 'B':
+            return
+        if x == 'C':
             exit_program()
-update_population()
 
+def update_population1():
+    while True:
+        row_to_update = input('\nEnter the row you wish to update. It can be between 0-555: ')
+        try:
+            x = int(row_to_update)
+
+            if 0 <= x <= 555:
+                # Next function in here
+                update_population2(x)
+                print('\nWould you like to update another row? Enter Yes or No: ')
+                update_next_row = input()
+                y = update_next_row.upper()
+                
+                if y == 'YES':
+                    continue
+                if y == 'NO':
+                    return
+                else:
+                    print('Not sure what you mean, exiting.')
+                    return
+        
+            else:
+                print('This row cannot be found inside dataset, would you like to try again?')
+                user_input = input('Enter yes or no: ')
+                y = user_input.lower()
+
+                if y == 'yes':
+                    continue
+                if y == 'no':
+                    exit_program()
+                else:
+                    print('I didnt understand that, restarting program')
+                    continue
+        except ValueError:
+            value_error()
+
+def update_population2(x):
+    while True:
+        selected_row = population_df.loc[x]
+
+        print(f'\nThis is the current data for your selected row: \n {selected_row}')
+        print('\nA. April\nB. July\nC. Both')
+        user_input = input('Please select a value to update: ')
+        y = user_input.upper()
+        acceptable_inputs = ['A','B','C']
+
+        if y not in acceptable_inputs:
+            if value_error():
+                continue
+
+        # update apr
+        if y == 'A':
+            while True:
+                try:
+                    apr1_population_update = int(input('Please enter your updated population: '))
+                    current_apr1_population = population_df.loc[x,'Pop Apr 1']
+                    user_update = input(f"The current population of row "
+                    f"{x} is {current_apr1_population}."
+                    f" Would you like to change update it to "
+                    f"{apr1_population_update}? Answer yes or no: ")
+
+                    user_update.lower()
+                    if user_update == 'yes':
+
+                        population_df.loc[x,'Pop Apr 1'] = apr1_population_update
+                        apr1_current_population = population_df.loc[x,'Pop Apr 1']
+                        jul1_current_population = population_df.loc[x,'Pop Jul 1']
+
+                        calculate_change(jul1_current_population,apr1_current_population)
+                        population_df.loc[x,'Change Pop'] = population_change 
+                        population_df.to_csv('pop_change.csv')
+                        
+                        print(f'\nHere is your updated population:\n{population_df.loc[x]}')
+                        return
+                    if user_update == 'no':
+                        print('Returning to main menu')
+                        break
+                    else:
+                        print('Not updating population, and returning to main menu.')
+                        break
+                except ValueError:
+                    value_error()
+
+        # update jul
+        if y == 'B':
+            while True:
+                try:
+                    jul1_population_update = int(input('Please enter your updated population: '))
+                    current_jul1_population = population_df.loc[x,'Pop Jul 1']
+                    user_update = input(f"The current population of row "
+                    f"{x} is {current_jul1_population}."
+                    f" Would you like to change update it to "
+                    f"{jul1_population_update}? Answer yes or no: ")
+
+                    user_update.lower()
+                    if user_update == 'yes':
+
+                        population_df.loc[x,'Pop Jul 1'] = jul1_population_update
+                        # change_pop func below thi line
+                        apr1_current_population = population_df.loc[x,'Pop Apr 1']
+                        jul1_current_population = population_df.loc[x,'Pop Jul 1']
+                        
+                        calculate_change(jul1_current_population,apr1_current_population)
+                        population_df.loc[x,'Change Pop'] = population_change 
+
+                        population_df.to_csv('pop_change.csv')
+                        print(f'\nHere is your updated population:\n{population_df.loc[x]}')
+                        return
+                    if user_update == 'no':
+                        print('Returning to main menu')
+                        return
+                    else:
+                        print('Not updating population, and returning to main menu.')
+                        return
+                except ValueError:
+                    value_error()
+
+        # update both
+        if y == 'C':
+            print('yo')
+
+def calculate_change(jul1,apr1):
+    global population_change
+    population_change = jul1 - apr1
+    
+
+update_population()
 def house_func():
     '''shows user info housing '''
     load_housing_data()
