@@ -7,6 +7,8 @@ import pandas as pd
 population_data = pd.read_csv('pop_change.csv')
 population_df = pd.DataFrame(population_data)
 pop_shape = population_df.shape[0]
+print(pop_shape)
+
 
 housing_data = pd.read_csv('housing.csv')
 housing_df = pd.DataFrame(housing_data)
@@ -163,18 +165,84 @@ def user_population_data():
             exit_program()
 def update_population():
     '''user can update population change between apr and jul'''
-    # my brain is so fried with the names, will fix
-    def update_population_yo():
+   
+    def update_population1():
         while True:
-            row_to_update = int(input('Yo are you an int: '))
-            x = row_to_update.isnumeric()
-            
-            print('Man thats no good.')
-            print(x)
-    update_population_yo()
+            row_to_update = input('\nEnter the row you wish to update. It can be between 0-555: ')
+            try:
+                x = int(row_to_update)
+
+                if 0 <= x <= 555:
+                    # Next function in here
+                    update_population2(x)
+               
+                else:
+                    print('This row cannot be found inside dataset, would you like to try again?')
+                    user_input = input('Enter yes or no: ')
+                    y = user_input.lower()
+
+                    if y == 'yes':
+                        continue
+                    if y == 'no':
+                        exit_program()
+                    else:
+                        print('I didnt understand that, restarting program')
+                        continue
+            except ValueError:
+                value_error()
+
+    def update_population2(x):
+        selected_row = population_df.loc[x]
+
+        print(f'\nThis is the current data for your selected row: \n {selected_row}')
+        print('\nA. April\nB. July\nC. Both')
+        user_input = input('Please select a value to update: ')
+        while True:
+            y = user_input.upper()
+            acceptable_inputs = ['A','B','C']
+
+            if y not in acceptable_inputs:
+                if value_error():
+                    continue
+
+            if y == 'A':
+                apr1_population_update = input('Please enter your updated population: ')
+                apr1_population_int = int(apr1_population_update)
+                current_apr1_population = population_df.loc[x,'Pop Apr 1']
+                user_update = input(f"The current population of row "
+                                    f"{x} is {current_apr1_population}."
+                f" Would you like to change update it to "
+                f"{apr1_population_update}? Answer yes or no: ")
+
+                user_update.lower()
+                if user_update == 'yes':
+
+                    population_df.loc[x,'Pop Apr 1'] = apr1_population_int
+                    population_df.to_csv('pop_change.csv')
+                    apr1_current_population = population_df.loc[x,'Pop Apr 1']
+                    jul1_current_population = population_df.loc[x,'Pop Jul 1']
+                    print(apr1_current_population + jul1_current_population)
+                    print(f'\nHere is your updated population:\n{population_df.loc[x]}')
+                    break
+                if user_update == 'no':
+                    print('Returning to main menu')
+                    break
+
+                print('Not updating population, and returning to main menu.')
+                break
+
+            if y == 'B':
+                print('yo')
+            if y == 'C':
+                print('yo')
+
+
+
+
     while True:
 
-        user_choice = input('A. Continue to update population \nB. Exit program')
+        print('A. Continue to update population \nB. Exit program')
+        user_choice = input('Enter a letter for your desired action: ')
         x = user_choice.upper()
 
         acceptable_inputs = ['A','B']
@@ -183,8 +251,7 @@ def update_population():
             if value_error():
                 continue
         if x == 'A':
-            load_apr1_data()
-            apr_func()
+            update_population1()
         if x == 'B':
             exit_program()
 update_population()
