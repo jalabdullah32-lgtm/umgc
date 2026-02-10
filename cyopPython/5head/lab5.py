@@ -1,13 +1,12 @@
-'''jalal_abdullah lab_5'''
+'''jalal_abdullah_lab_five '''
 import sys
 import statistics
 import pandas as pd
-
+import matplotlib.pyplot as plt
 
 population_data = pd.read_csv('pop_change.csv', index_col=0)
 population_df = pd.DataFrame(population_data)
 pop_shape = population_df.shape[0]
-print(pop_shape)
 
 
 housing_data = pd.read_csv('housing.csv')
@@ -95,38 +94,58 @@ def load_jul1_data():
     # print(standard_deviation_jul1)
 def load_housing_data():
     '''contains data for housing func'''
-    global house_age
-    global house_bedrooms
-    global year_built
-    global house_rooms
-    global house_utilities
+    global min_house_age
+    global max_house_age
+    global mean_house_age
+
+    global min_house_bedrooms
+    global max_house_bedrooms
+    global mean_house_bedrooms
+
+    global min_year_built
+    global max_year_built
+    global mean_year_built
+
+    global min_house_rooms
+    global max_house_rooms
+    global mean_house_rooms
+
+    global min_house_utilities
+    global max_house_utilities
+    global mean_house_utilities
+
     global house_weight
     global house_n_units
 
     # gets ages
-    house_age = housing_df['AGE']
-
+    min_house_age = housing_df['AGE'].min()
+    max_house_age = housing_df['AGE'].max()
+    mean_house_age = housing_df['AGE'].mean()
     # get bedrooms
-    house_bedrooms = housing_df['BEDRMS'].min()
+    min_house_bedrooms = housing_df['BEDRMS'].min()
+    max_house_bedrooms = housing_df['BEDRMS'].max()
+    mean_house_bedrooms = housing_df['BEDRMS'].mean()
 
     # get year_built
-    year_built = housing_df['BUILT'].max()
-
+    min_year_built = housing_df['BUILT'].min()
+    max_year_built = housing_df['BUILT'].max()
+    mean_year_built = housing_df['BUILT'].mean()
     # gets_rooms
-    house_rooms = housing_df['ROOMS'].mean()
-
+    min_house_rooms = housing_df['ROOMS'].min()
+    max_house_rooms = housing_df['ROOMS'].max()
+    mean_house_rooms = housing_df['ROOMS'].mean()
     # gets_utility
-    house_utilities = housing_df['UTILITY']
+    min_house_utilities = housing_df['UTILITY'].min()
+    max_house_utilities = housing_df['UTILITY'].max()
+    mean_house_utilities = housing_df['UTILITY'].mean()
 
     #gets weight
     house_weight = housing_df['WEIGHT']
 
     #gets nunits
     house_n_units = housing_df['NUNITS']
-
-
 def apr_func():
-    '''shows user info on apr '''
+    '''shows user info on apr and histogram '''
 
     print('\nThe population stats of April 1 are:')
     print(f'Count = {pop_shape}')
@@ -134,8 +153,15 @@ def apr_func():
     print(f'Standard Deviation = {standard_deviation_apr1}')
     print(f'Min = {apr1_min}')
     print(f'Max = {apr1_max}')
+
+    plt.figure(figsize=(8, 5))
+    plt.hist(pop_apr1, bins=20, alpha=0.7)
+    plt.title('Histogram of Pop Apr1')
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.show()
+
 def july_func():
-    '''shows user info on jul '''
+    '''shows user info on jul and histogram '''
 
     print('\nThe population stats of July 1 are:')
     print(f'Count: {pop_shape}')
@@ -143,14 +169,24 @@ def july_func():
     print(f'Standard Deviation = {standard_deviation_jul1}')
     print(f'Min = {jul1_min}')
     print(f'Max = {jul1_max}')
+
+    plt.figure(figsize=(8, 5))
+    plt.hist(pop_jul1, bins=20, alpha=0.7)
+    plt.title('Histogram of Pop Jul 1')
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.show()
+
 def user_population_data():
-    '''runs population data'''
+    '''allows user to view desired population
+      month, or update program'''
+
     while True:
-        print('\nA. Population of April 1 \nB. Population of July 1\nC. Return to home\nD. Exit program')
+        print('\nA. Population of April 1 \nB. Population of July 1\nC. Update population\n'
+              'D. Return to home\nE. Exit program')
         column_to_analyze = input('Select a population to analyze, or exit the program: ')
         x = column_to_analyze.upper()
 
-        acceptable_inputs = ['A','B','C']
+        acceptable_inputs = ['A','B','C','D','E']
 
         if x not in acceptable_inputs:
             if value_error():
@@ -162,14 +198,16 @@ def user_population_data():
             load_jul1_data()
             july_func()
         if x == 'C':
-            return
+            update_population()
         if x == 'D':
+            return
+        if x == 'E':
             exit_program()
 def update_population():
-    '''user can update population change between apr and jul'''
-    while True: 
+    '''user can update population between apr and jul'''
+    while True:
 
-        print('A. Continue to update population \nB. Return to home\nC. Exit program')
+        print('\nA. Continue to update population \nB. Return to home\nC. Exit program')
         user_choice = input('Enter a letter for your desired action: ')
         x = user_choice.upper()
 
@@ -186,50 +224,50 @@ def update_population():
             exit_program()
 
 def update_population1():
+    '''user selects row to update'''
     while True:
         row_to_update = input('\nEnter the row you wish to update. It can be between 0-555: ')
         try:
             x = int(row_to_update)
 
             if 0 <= x <= 555:
-                # Next function in here
                 update_population2(x)
                 print('\nWould you like to update another row? Enter Yes or No: ')
                 update_next_row = input()
                 y = update_next_row.upper()
-                
+
                 if y == 'YES':
                     continue
                 if y == 'NO':
                     return
-                else:
-                    print('Not sure what you mean, exiting.')
-                    return
-        
-            else:
-                print('This row cannot be found inside dataset, would you like to try again?')
-                user_input = input('Enter yes or no: ')
-                y = user_input.lower()
+                print('Not sure what you mean, exiting.')
+                return
 
-                if y == 'yes':
-                    continue
-                if y == 'no':
-                    exit_program()
-                else:
-                    print('I didnt understand that, restarting program')
-                    continue
+
+            print('This row cannot be found inside dataset, would you like to try again?')
+            user_input = input('Enter yes or no: ')
+            y = user_input.lower()
+
+            if y == 'yes':
+                continue
+            if y == 'no':
+                exit_program()
+            else:
+                print('I didnt understand that, restarting program')
+                continue
         except ValueError:
             value_error()
 
 def update_population2(x):
+    '''shows user their selected row, and allows them to change it'''
     while True:
         selected_row = population_df.loc[x]
 
         print(f'\nThis is the current data for your selected row: \n {selected_row}')
-        print('\nA. April\nB. July\nC. Both')
+        print('\nA. April\nB. July')
         user_input = input('Please select a value to update: ')
         y = user_input.upper()
-        acceptable_inputs = ['A','B','C']
+        acceptable_inputs = ['A','B']
 
         if y not in acceptable_inputs:
             if value_error():
@@ -254,17 +292,16 @@ def update_population2(x):
                         jul1_current_population = population_df.loc[x,'Pop Jul 1']
 
                         calculate_change(jul1_current_population,apr1_current_population)
-                        population_df.loc[x,'Change Pop'] = population_change 
+                        population_df.loc[x,'Change Pop'] = population_change
                         population_df.to_csv('pop_change.csv')
-                        
+
                         print(f'\nHere is your updated population:\n{population_df.loc[x]}')
                         return
                     if user_update == 'no':
                         print('Returning to main menu')
-                        break
-                    else:
-                        print('Not updating population, and returning to main menu.')
-                        break
+                        return
+                    print('Not updating population, and returning to main menu.')
+                    return
                 except ValueError:
                     value_error()
 
@@ -286,9 +323,9 @@ def update_population2(x):
                         # change_pop func below thi line
                         apr1_current_population = population_df.loc[x,'Pop Apr 1']
                         jul1_current_population = population_df.loc[x,'Pop Jul 1']
-                        
+
                         calculate_change(jul1_current_population,apr1_current_population)
-                        population_df.loc[x,'Change Pop'] = population_change 
+                        population_df.loc[x,'Change Pop'] = population_change
 
                         population_df.to_csv('pop_change.csv')
                         print(f'\nHere is your updated population:\n{population_df.loc[x]}')
@@ -296,36 +333,49 @@ def update_population2(x):
                     if user_update == 'no':
                         print('Returning to main menu')
                         return
-                    else:
-                        print('Not updating population, and returning to main menu.')
-                        return
+                    print('Not updating population, and returning to main menu.')
+                    return
                 except ValueError:
                     value_error()
 
-        # update both
-        if y == 'C':
-            print('yo')
-
 def calculate_change(jul1,apr1):
+    '''calculates change between months'''
     global population_change
     population_change = jul1 - apr1
-    
 
-update_population()
 def house_func():
-    '''shows user info housing '''
+    '''shows user info on houses '''
     load_housing_data()
 
     print('\nThe housing stats are:')
-    print(f'House age = {house_age}')
-    print(f'Bedrooms = {house_bedrooms}')
-    print(f'Year built = {year_built}')
-    print(f'Rooms = {house_rooms}')
-    print(f'House utilities = {house_utilities}')
 
+    print('\nHouse age:')
+    print(f'Min = {min_house_age}')
+    print(f'Mean = {mean_house_age}')
+    print(f'Max = {max_house_age}')
+
+    print('\nBedrooms:')
+    print(f'Min = {min_house_bedrooms}')
+    print(f'Mean = {mean_house_bedrooms}')
+    print(f'Max = {max_house_bedrooms}')
+
+    print('\nYear built:')
+    print(f'Min = {min_year_built}')
+    print(f'Mean = {mean_year_built}')
+    print(f'Max = {max_year_built}')
+
+    print('\nRooms:')
+    print(f'Min = {min_house_rooms}')
+    print(f'Mean = {mean_house_rooms}')
+    print(f'Max = {max_house_rooms}')
+
+    print('\nHouse utilities:')
+    print(f'Min = {min_house_utilities}')
+    print(f'Max = {max_house_utilities}')
+    print(f'Mean = {mean_house_utilities}')
 
 def menu():
-    '''entry point for programs'''
+    '''entry point for program'''
     while True:
         print('\n\n lab5 program')
         print('-------------------------------------------------')
