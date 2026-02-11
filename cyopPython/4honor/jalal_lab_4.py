@@ -1,7 +1,7 @@
 '''Docstring for jalal_lab_4'''
 import sys
 import numpy as np
-
+import hashlib
 # sample np.arrays for testing 
 # matrix_one = np.array([[1.,2.,3.],[4.,5.,6.],[7.,8.,9.]])
 # matrix_two = np.array([[13.7,11.4,2.1],[5.3,14.6,43.8],[10.5,9.3,5.1]])
@@ -48,7 +48,7 @@ def phone_number():
         if result == False:
             value_error()
             continue
-phone_number()
+# phone_number()
 def zipcode():
     '''user enters zipcode and it is validated'''
     
@@ -64,7 +64,24 @@ def zipcode():
 
         if result == False:
             value_error()
-zipcode()
+# zipcode()
+
+crack_this = input('Enter a message to encode: ')
+crack_this = crack_this.encode()
+
+print(hashlib.md5(crack_this).hexdigest())
+print(hashlib.sha256(crack_this).hexdigest())
+print(hashlib.sha512(crack_this).hexdigest())
+
+# When hashing passwords, do something like crack_this + random concatination
+# Do 4 md5, 3 256, and 3 512
+
+
+
+
+
+
+
 
 def matrix_row_one():
     '''Docstring for jalal_lab_4'''
@@ -329,4 +346,4 @@ def menu():
 
         if x == 'E':
             exit_program()
-menu()
+# menu()
