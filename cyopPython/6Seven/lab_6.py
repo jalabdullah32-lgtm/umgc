@@ -1,18 +1,23 @@
 from flask import Flask
 from flask import render_template
+
+# cmd python -m flask --app lab_6 --debug run
+
 app = Flask(__name__)
 
+if __name__ == "__main__":
+    app.run(debug=True)
+
 @app.route('/')
+@app.route('/redKeyHomepage')
 def index():
-    return show_hello()
+    return render_template('redKey1.html')
 
-# Can call functions as part of the returns
-def show_hello():
-    return 'Hello, UMGC SDEV Students!'
+@app.route('/redKeySignup/')
+def red_key2():
+    return render_template('redKey2.html')
 
-# Can provide multiple route versions
-# And can render template - found in /template folder
-@app.route('/hello/')
-@app.route('/hello/<name>')
-def hello(name=None):
-    return render_template('rin.html', name=name) 
+@app.route('/redKeyTerms/')
+def red_key3():
+    return render_template('redKey3.html')
+
