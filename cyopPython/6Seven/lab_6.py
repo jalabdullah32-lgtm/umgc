@@ -9,15 +9,15 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 @app.route('/')
-@app.route('/redKeyHomepage')
+@app.route('/home')
 def index():
-    return render_template('redKey1.html')
+    return render_template('home.html')
 
-@app.route('/redKeySignup/')
-def red_key2():
-    return render_template('redKey2.html')
+@app.route('/cookies')
+def cookies():
+    return render_template('cookies.html')
 
-@app.route('/redKeyTerms/')
-def red_key3():
-    return render_template('redKey3.html')
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
