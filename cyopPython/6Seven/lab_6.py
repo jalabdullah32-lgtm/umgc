@@ -1,18 +1,26 @@
+''' lab6 flask proj'''
 from flask import Flask
 from flask import render_template
+
+# cmd python -m flask --app lab_6 --debug run
+
 app = Flask(__name__)
 
+if __name__ == "__main__":
+    app.run(debug=True)
+
 @app.route('/')
+@app.route('/home')
 def index():
-    return show_hello()
+    ''' lab6 flask proj'''
+    return render_template('home.html')
 
-# Can call functions as part of the returns
-def show_hello():
-    return 'Hello, UMGC SDEV Students!'
+@app.route('/cookies')
+def cookies():
+    ''' lab6 flask proj'''
+    return render_template('cookies.html')
 
-# Can provide multiple route versions
-# And can render template - found in /template folder
-@app.route('/hello/')
-@app.route('/hello/<name>')
-def hello(name=None):
-    return render_template('rin.html', name=name) 
+@app.route('/about')
+def about():
+    ''' lab6 flask proj'''
+    return render_template('about.html')
