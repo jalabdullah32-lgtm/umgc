@@ -15,6 +15,10 @@
 
 <body>
 <h1>Register</h1>
+<h1>sample Password: #QeX9p0apr+Su!s</h1>
+{% if error%}
+    <p><strong>{{error}}</strong></p>
+{% endif%}
 
 <form action="/registration" method="post">
     <table>

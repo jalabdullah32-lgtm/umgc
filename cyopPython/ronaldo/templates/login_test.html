@@ -3,17 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Successful login</title>
+    <title>Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <style>
     body {
     font-family: "Roboto";
 }
+
     </style>
 
 <body>
-      <p>Registration Successful</p>
-      <p>Username: {{name}}</p>
+<h1>Login</h1>
+<h1>sample Password: #QeX9p0apr+Su!s</h1>
+
+{% if error%}
+    <p><strong>{{error}}</strong></p>
+{% endif%}
+
+<form action="/login" method="post">
+    <table>
+    <tr>
+        <td><label for="username">Username</label></td>
+        <td><input name="username" id="username"
+        required></td>
+    </tr>
+    <tr>
+        <td><label for="password">Password</label></td>
+        <td> <input type="password" name="password" id="password"
+        required></td>
+    </tr>
+    <tr>
+        <td colspan='2'><input type="submit" value="Register"></td>
+    </tr>
+    </table>
+</form>
 </body>
 </html>
