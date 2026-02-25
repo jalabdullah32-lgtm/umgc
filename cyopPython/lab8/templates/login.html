@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <style>
+    body {
+    font-family: "Roboto";
+}
+
+    </style>
+
+<body>
+{% if error%}
+    <p><strong>{{error}}</strong></p>
+{% endif%}
+
+<header>
+<div class="main-heading">
+    <div class="title-row">
+        <img src="/static/images/tcc logo.jpeg" width="150px" alt="tcc logo">
+        <h1>toffeeCookieCompany</h1>
+    </div>
+    <p>the best cookie you'll ever eat</p>
+</div>
+</header>
+<h2 class="login-registration">Login</h2>
+<!-- <h2 class="login-registration"> Create account</h2>
+<a href="/registration.html"><h2 class="login-registration">Register Account</h2></a> -->
+<form action="/login" method="post" class="form">
+    <table>
+    <tr>
+        <td><label for="username">Username</label></td>
+        <td><input name="username" id="username"
+        required></td>
+    </tr>
+    <tr>
+        <td><label for="password">Password</label></td>
+        <td> <input type="password" name="password" id="password"
+        required></td>
+    </tr>
+    <tr>
+        <td colspan='2'><input type="submit" value="Login"></td>
+    </tr>
+        <tr>
+        <td colspan='2'><a href="/registration">Create Account</a></td>
+    </tr>
+    </table>
+</form>
+</body>
+</html>
