@@ -76,8 +76,14 @@
     list-style-position: inside;
 }
 
-.title-row{
+.form{
     display: flex;
-    align-items: center;
+    justify-content: center;
 }
 
+.login-registration{
+    display:  flex;
+    justify-content: center;
+    width: 100px;
+    margin: 0 auto;
+}
