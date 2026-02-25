@@ -1,12 +1,12 @@
 ''' lab7 flask proj'''
 import re
+from difflib import *
 from flask import Flask, render_template, request, redirect, url_for,flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_session import Session
 from flask import *
 
-
-# cmd python -m flask --app test_fiele.py --debug run
+# cmd python -m flask --app dumbtest.py --debug run
 
 app = Flask(__name__)
 app.secret_key = "super secret key"
@@ -44,6 +44,16 @@ def user_is_valid(username):
     if username in read_data:
         return 'Username is already taken, please try again'
     return None
+def common_passwords(password):
+    '''checks user password against common ones'''
+    with open('CommonPasswords.txt',encoding="utf-8") as f:
+        read_data = f.read()
+    close_passwords = get_close_matches(password,[read_data])
+    if close_passwords == None:
+        return None
+    if close_passwords == True:
+        return 'The password you entered  was found in a list of common passwords'
+
 
 @app.route('/registration', methods = ['GET','POST'])
 def register():
