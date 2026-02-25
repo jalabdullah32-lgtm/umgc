@@ -42,81 +42,40 @@ def exit_program():
 def load_apr1_data():
     '''contains data for apr population'''
 
-    global pop_apr1
-    global apr1_min
-    global apr1_max
-    global apr1_mean
-    global standard_deviation_apr1
 
-    # this gets population of everything in pop_apr1
     pop_apr1 = population_df['Pop Apr 1']
     # print(pop_apr1)
 
-    # prints min/max of apr1Pop
     apr1_min = population_df['Pop Apr 1'].min()
     # print(apr1_min)
 
     apr1_max = population_df['Pop Apr 1'].max()
     # print(apr1_max)
 
-    # prints mean of pop apr1
     apr1_mean = population_df['Pop Apr 1'].mean()
     # print(apr1_mean)
 
-    # standard deviation??
     standard_deviation_apr1 = statistics.stdev(population_df['Pop Apr 1'])
     # print(standard_deviation)
 def load_jul1_data():
     '''contains data for jul1 population'''
 
-    global pop_jul1
-    global jul1_min
-    global jul1_max
-    global jul1_mean
-    global standard_deviation_jul1
-    # this gets population of everything in pop_July1
     pop_jul1 = population_df['Pop Jul 1']
     # print(pop_jul1)
 
-    # prints min/max of jul1Pop
     jul1_min = population_df['Pop Jul 1'].min()
     # print(jul1_min)
 
     jul1_max = population_df['Pop Jul 1'].max()
     # print(jul1_max)
 
-    # prints mean of pop jul1
     jul1_mean = population_df['Pop Jul 1'].mean()
     # print(jul1_mean)
 
-    # standard deviation
     standard_deviation_jul1 = statistics.stdev(population_df['Pop Jul 1'])
     # print(standard_deviation_jul1)
 def load_housing_data():
     '''contains data for housing func'''
-    global min_house_age
-    global max_house_age
-    global mean_house_age
-
-    global min_house_bedrooms
-    global max_house_bedrooms
-    global mean_house_bedrooms
-
-    global min_year_built
-    global max_year_built
-    global mean_year_built
-
-    global min_house_rooms
-    global max_house_rooms
-    global mean_house_rooms
-
-    global min_house_utilities
-    global max_house_utilities
-    global mean_house_utilities
-
-    global house_weight
-    global house_n_units
-
     # gets ages
     min_house_age = housing_df['AGE'].min()
     max_house_age = housing_df['AGE'].max()
