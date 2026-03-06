@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <style>
+    body {
+    font-family: "Roboto";
+}
+
+    </style>
+</head>
+<body>
+
+<!-- About page -->
+<div class="main-heading">
+    <h1>toffeeCookieCompany</h1>
+    <p>the best cookie you'll ever eat</p>
+</div>
+
+<div class="button-container">
+    <a href="/cookies" class="button">See Cookies</a>
+    <a href="/home" class="button">Home</a>
+</div>
+
+
+<section class="about-me">
+    <article>
+        <h2 class="about-titles">Who am I?</h2>
+        <img class="about-img" src="/static/images/jalalinfrance.JPEG" alt="me in france">
+        <p class="about-text">My name is Jalal Abdullah. I am 23 year old senior, completing
+        my bachelors degree at University of Maryland Global Campus. When
+        I'm not in school, you'll find me either working or watching unproductive
+        YouTube videos.
+        </p>
+    </article>
+
+    <article>
+        <h2 class="about-titles">Why I started baking?</h2>
+        <img class="about-img" src="/static/images/smreo.JPEG" alt="see cookies">
+        <p class="about-text">
+        Before the cookies, I had dreams of becoming a professional soccer player. 
+        An ankle injury caused me to hang up the cleats and I replaced all of my 
+        free time with baking cookies. Somehow they ended up being something people
+        obsess over and I will forever be grateful for it. 
+        </p>
+    </article>
+
+
+    <article>
+        <h2 class="about-titles">When will I open my own shop?</h2>
+        <img class="about-img" src="/static/images/mixing xookies.JPEG" alt="industrial mixer">
+        <p class="about-text">
+        My life is all over the place right now. I'm wrapping up my bachelors degree, 
+        searching for internships, and working part time. If I could give you all a roadmap,
+        this is what it would look like:
+        </p>
+        <ol class="about-list">
+            <li>Graduate</li>
+            <li>Get a job</li>
+            <li>Save money</li>
+            <li>Open shop</li>
+            <li>Sell 100 million cookies</li>
+        </ol>
+    </article>
+
+</section>
+
+
+
+</body>
+</html>
